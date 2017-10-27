@@ -7,6 +7,16 @@ export default {
       name: 'tux',
       type: 'spritesheet',
       path: 'assets/images/heroe/tux.png'
+    },
+    {
+      name: 'arctis',
+      type: 'sprite',
+      path: 'assets/images/backgrounds/arctis.png'
+    },
+    {
+      name: 'arctiskies',
+      type: 'sprite',
+      path: 'assets/images/backgrounds/arctiskies.png'
     }
   ]
 }
