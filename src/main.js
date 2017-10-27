@@ -18,7 +18,7 @@ class Game extends Phaser.Game {
     this.state.add('LoadingState', LoadingState, false)
     this.state.add('Game', GameState, false)
 
-    this.state.start('LoadingState')
+    this.state.start('LoadingState', undefined, undefined, {assetsToLoad: config.baseAssets})
   }
 }
 
