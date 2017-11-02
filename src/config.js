@@ -11,12 +11,12 @@ export default {
     {
       name: 'arctis',
       type: 'image',
-      url: 'assets/images/backgrounds/arctis.png'
+      url: 'assets/images/backgrounds/arctis.jpg'
     },
     {
       name: 'arctiskies',
       type: 'image',
-      url: 'assets/images/backgrounds/arctiskies.png'
+      url: 'assets/images/backgrounds/arcticskies1.png'
     }
   ]
 }
