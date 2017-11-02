@@ -6,17 +6,17 @@ export default {
     {
       name: 'tux',
       type: 'spritesheet',
-      path: 'assets/images/heroe/tux.png'
+      url: 'assets/images/heroe/tux.png'
     },
     {
       name: 'arctis',
       type: 'image',
-      path: 'assets/images/backgrounds/arctis.png'
+      url: 'assets/images/backgrounds/arctis.png'
     },
     {
       name: 'arctiskies',
       type: 'image',
-      path: 'assets/images/backgrounds/arctiskies.png'
+      url: 'assets/images/backgrounds/arctiskies.png'
     }
   ]
 }
