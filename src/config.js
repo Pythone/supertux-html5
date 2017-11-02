@@ -10,12 +10,12 @@ export default {
     },
     {
       name: 'arctis',
-      type: 'sprite',
+      type: 'image',
       path: 'assets/images/backgrounds/arctis.png'
     },
     {
       name: 'arctiskies',
-      type: 'sprite',
+      type: 'image',
       path: 'assets/images/backgrounds/arctiskies.png'
     }
   ]
