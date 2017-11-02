@@ -19,6 +19,11 @@ export default class extends Phaser.State {
     })
   }
 
+  create () {
+    console.log('LoadingState: finished loading assets')
+    this.game.nextState()
+  }
+
   loadAsset (asset) {
     if (asset.type === 'image') {
       this.load.image(asset.name, asset.url)
