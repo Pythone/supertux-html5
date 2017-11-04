@@ -2,8 +2,8 @@ import 'pixi'
 import 'p2'
 import Phaser from 'phaser'
 
-import LoadingState from './states/LoadingScreen'
-import GameState from './states/GameState'
+import StateLoading from './states/StateLoading'
+import StateGame from './states/StateGame'
 
 import config from './config'
 
@@ -15,14 +15,14 @@ class Game extends Phaser.Game {
 
     super(width, height, Phaser.CANVAS, 'content', null)
 
-    this.state.add('LoadingState', LoadingState, false)
-    this.state.add('GameState', GameState, false)
+    this.state.add('StateLoading', StateLoading, false)
+    this.state.add('StateGame', StateGame, false)
 
-    this.state.start('LoadingState', undefined, undefined, {assetsToLoad: config.baseAssets})
+    this.state.start('StateLoading', undefined, undefined, {assetsToLoad: config.baseAssets})
   }
 
   nextState () {
-    this.state.start('GameState')
+    this.state.start('StateGame')
   }
 }
 
