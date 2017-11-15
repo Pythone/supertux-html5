@@ -5,6 +5,8 @@ import Phaser from 'phaser'
 import StateLoading from './states/StateLoading'
 import StateGame from './states/StateGame'
 
+import StatesOrder from './states/StatesOrder'
+
 import config from './config'
 
 class Game extends Phaser.Game {
@@ -15,14 +17,21 @@ class Game extends Phaser.Game {
 
     super(width, height, Phaser.CANVAS, 'content', null)
 
+    this.statesOrder = new StatesOrder()
+
     this.state.add('StateLoading', StateLoading, false)
     this.state.add('StateGame', StateGame, false)
 
-    this.state.start('StateLoading', undefined, undefined, {assetsToLoad: config.baseAssets})
+    config.states.forEach((state) => {
+      this.statesOrder.addState(state.key, state.arguments)
+    })
+
+    this.nextState()
   }
 
   nextState () {
-    this.state.start('StateGame')
+    let nextState = this.statesOrder.getNextState()
+    this.state.start(nextState.key, undefined, undefined, nextState.arguments)
   }
 }
 
