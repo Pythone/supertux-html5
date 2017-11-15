@@ -17,6 +17,12 @@ export default {
       name: 'arctiskies',
       type: 'image',
       url: 'assets/images/backgrounds/arcticskies1.png'
+    },
+    {
+      name: 'tux',
+      type: 'atlasJSON',
+      url_img: 'assets/images/tux.png',
+      url_json: 'assets/images/tux.json'
     }
   ]
 }
