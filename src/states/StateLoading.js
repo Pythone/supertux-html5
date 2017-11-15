@@ -27,6 +27,11 @@ export default class extends Phaser.State {
   loadAsset (asset) {
     if (asset.type === 'image') {
       this.load.image(asset.name, asset.url)
+      return
+    }
+
+    if (asset.type === 'atlasJSON') {
+      this.load.atlasJSONArray(asset.name, asset.url_img, asset.url_json)
     }
   }
 }
