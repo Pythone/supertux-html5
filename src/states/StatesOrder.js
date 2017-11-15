@@ -5,7 +5,7 @@ export default class {
   }
 
   addState (strKey, objArguments) {
-    this.arrState.push({key: strKey, arguments: objArguments})
+    this.arrStates.push({key: strKey, arguments: objArguments})
   }
 
   getNextState () {
