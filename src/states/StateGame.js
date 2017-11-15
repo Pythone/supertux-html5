@@ -19,7 +19,6 @@ export default class extends Phaser.State {
     ]
   }
   init () {
-    console.log('Hello from GameState')
   }
   preload () {}
 
@@ -31,6 +30,5 @@ export default class extends Phaser.State {
   }
 
   update () {
-        // this.sprite.play('tux/small/walk')
   }
 }
