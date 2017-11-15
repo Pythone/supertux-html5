@@ -24,5 +24,24 @@ export default {
       url_img: 'assets/images/tux.png',
       url_json: 'assets/images/tux.json'
     }
+  ],
+  states: [
+    {
+      key: 'StateLoading',
+      arguments: {
+        assetsToLoad: [
+          {
+            name: 'tux',
+            type: 'atlasJSON',
+            url_img: 'assets/images/tux.png',
+            url_json: 'assets/images/tux.json'
+          }
+        ]
+      }
+    },
+    {
+      key: 'StateGame',
+      arguments: {}
+    }
   ]
 }
