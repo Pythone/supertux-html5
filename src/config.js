@@ -1,6 +1,6 @@
 export default {
-  gameWidth: 760,
-  gameHeight: 400,
+  gameWidth: 800,
+  gameHeight: 600,
   localStorageName: 'phaseres6webpack',
   baseAssets: [
     {
@@ -35,12 +35,17 @@ export default {
             type: 'atlasJSON',
             url_img: 'assets/images/tux.png',
             url_json: 'assets/images/tux.json'
+          },
+          {
+            name: 'background/arcticskies',
+            type: 'image',
+            url: 'assets/images/backgrounds/arcticskies1.png'
           }
         ]
       }
     },
     {
-      key: 'StateGame',
+      key: 'StateGameWorld_0-0',
       arguments: {}
     }
   ]
