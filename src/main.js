@@ -3,7 +3,7 @@ import 'p2'
 import Phaser from 'phaser'
 
 import StateLoading from './states/StateLoading'
-import StateGame from './states/StateGame'
+import StateGameWorld_0_0 from './states/StateGameWorld_0-0'
 
 import StatesOrder from './states/StatesOrder'
 
@@ -20,7 +20,7 @@ class Game extends Phaser.Game {
     this.statesOrder = new StatesOrder()
 
     this.state.add('StateLoading', StateLoading, false)
-    this.state.add('StateGame', StateGame, false)
+    this.state.add('StateGameWorld_0-0', StateGameWorld_0_0, false)
 
     config.states.forEach((state) => {
       this.statesOrder.addState(state.key, state.arguments)
