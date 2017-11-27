@@ -6,6 +6,10 @@ export default class extends Phaser.Sprite {
   constructor (game, x = 0, y = 0, key = 'tux') {
     super(game, x, y, key)
 
+    this.facingLeft = false
+    this.anchor.x = 0.5
+    this.anchor.y = 0.5
+
     setAnimations(configTux.animations, this)
 
     this.game.physics.enable(this, Phaser.ARCADE)
@@ -24,5 +28,19 @@ export default class extends Phaser.Sprite {
         let bounds = this.getBounds()
         this.body.setSize(bounds.width, bounds.height)
     }
+  }
+
+  faceLeft(){
+      if(!this.facingLeft){
+          this.scale.x *= -1
+          this.facingLeft = true
+      }
+  }
+
+  faceRight(){
+      if(this.facingLeft){
+          this.scale.x *= -1
+          this.facingLeft = false
+      }
   }
 }
