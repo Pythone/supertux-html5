@@ -40,6 +40,11 @@ export default {
             name: 'background/arcticskies',
             type: 'image',
             url: 'assets/images/backgrounds/arcticskies1.png'
+          },
+          {
+            name: 'tilemapWorld_0_0',
+            type: 'tilemap',
+            url: 'assets/tilemaps/World_0_0.tmx'
           }
         ]
       }
