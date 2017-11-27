@@ -44,7 +44,7 @@ export default {
           {
             name: 'tilemapWorld_0_0',
             type: 'tilemap',
-            url: 'assets/tilemaps/World_0_0.tmx'
+            url: 'assets/tilemaps/World_0_0.js'
           }
         ]
       }
