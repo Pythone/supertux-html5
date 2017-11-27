@@ -45,6 +45,11 @@ export default {
             name: 'tilemapWorld_0_0',
             type: 'tilemap',
             url: 'assets/tilemaps/World_0_0.js'
+          },
+          {
+            name: 'icebridge',
+            type: 'image',
+            url: 'assets/images/original/images/tiles/blocks/icebridge.png',
           }
         ]
       }
