@@ -14,8 +14,6 @@ export default class extends Phaser.State {
   init () {
     this.physics.startSystem(Phaser.Physics.ARCADE)
     this.physics.arcade.gravity.y = 300
-
-    console.log(this.physics.arcade.gravity.y)
   }
   preload () {}
 
@@ -39,9 +37,11 @@ export default class extends Phaser.State {
 
     if (this.keyLeft.isDown) {
       this.tuxVelocity.x = -180
+      this.tux.faceLeft()
     }
     if (this.keyRight.isDown) {
       this.tuxVelocity.x = 180
+      this.tux.faceRight()
     }
 
       // JUMP: this.tux.body.blocked.down checks if tux is 'standing'
@@ -51,6 +51,6 @@ export default class extends Phaser.State {
   }
 
   render () {
-    this.game.debug.body(this.tux)
+    //this.game.debug.body(this.tux)
   }
 }
