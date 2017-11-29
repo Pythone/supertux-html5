@@ -63,6 +63,12 @@ export default class extends Phaser.State {
     */
     this.physics.arcade.collide(this.tux, this.layerGround)
 
+    this.physics.arcade.collide(this.tux, this.cratesEmpty, (tux, emptyCrate) => {
+      if (emptyCrate.body.touching.down) {
+        emptyCrate.destroy()
+      }
+    })
+
     if (this.keyLeft.isDown) {
       this.tuxVelocity.x = -180
       this.tux.faceLeft()
@@ -116,5 +122,6 @@ export default class extends Phaser.State {
     let sprite = group.create(element.x, element.y, element.properties.imageKey)
 
     sprite.body.allowGravity = allowGravity
+    sprite.body.immovable = true
   }
 }
