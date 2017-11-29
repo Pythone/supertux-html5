@@ -10,6 +10,10 @@ export default class extends Phaser.State {
     this.keyUp = null
     this.keyLeft = null
     this.keyRight = null
+
+    this.tilemap = null
+    this.layerGround = null
+    this.layerCrates = null
   }
   init () {
     this.physics.startSystem(Phaser.Physics.ARCADE)
@@ -22,7 +26,15 @@ export default class extends Phaser.State {
     this.keyLeft = this.input.keyboard.addKey(Phaser.Keyboard.LEFT)
     this.keyRight = this.input.keyboard.addKey(Phaser.Keyboard.RIGHT)
 
-    this.add.image(0, 0, 'background/arcticskies')
+    this.tilemap = this.add.tilemap('tilemapWorld_0_0')
+    this.tilemap.addTilesetImage('icebridge')
+    this.tilemap.addTilesetImage('brick0')
+    this.layerGround = this.tilemap.createLayer('Ground')
+    this.layerCrates = this.tilemap.createLayer('Crates')
+    this.layerGround.resizeWorld()
+    this.layerCrates.resizeWorld()
+
+    //this.add.image(0, 0, 'background/arcticskies')
 
     this.tux = new CharacterTux(this.game, 100, 100, 'tux')
     this.add.existing(this.tux)
@@ -30,10 +42,25 @@ export default class extends Phaser.State {
 
     this.tux.body.collideWorldBounds = true
     this.tuxVelocity = this.tux.body.velocity
+
+    this.camera.follow(this.tux)
+
+    this.tilemap.setCollisionBetween(1, 100, true, this.layerGround)
+    //this.tilemap.setCollisionBetween(1, 100)
+    //this.tilemap.setCollision(1, true, this.layerGround)
+
+    //console.log(this.layerGround.getTiles(0, 0, this.layerGround.layer.widthInPixels, this.layerGround.layer.heightInPixels))
   }
 
   update () {
     this.tuxVelocity.x = 0
+
+    /*
+    this.physics.arcade.collide(this.tux, this.layerGround, function(){
+        console.log('tux and layerGround collsion')
+    })
+    */
+    this.physics.arcade.collide(this.tux, this.layerGround)
 
     if (this.keyLeft.isDown) {
       this.tuxVelocity.x = -180
@@ -48,6 +75,7 @@ export default class extends Phaser.State {
     if (this.keyUp.isDown && this.tux.body.blocked.down) {
       this.tuxVelocity.y = -280
     }
+
   }
 
   render () {
