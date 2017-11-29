@@ -43,13 +43,18 @@ export default {
           },
           {
             name: 'tilemapWorld_0_0',
-            type: 'tilemap',
-            url: 'assets/tilemaps/World_0_0.js'
+            type: 'tilemap_json',
+            url: 'assets/tilemaps/World_0_0.json'
           },
           {
             name: 'icebridge',
             type: 'image',
-            url: 'assets/images/original/images/tiles/blocks/icebridge.png',
+            url: 'assets/images/original/images/tiles/blocks/icebridge.png'
+          },
+          {
+            name: 'brick0',
+            type: 'image',
+            url: 'assets/images/original/images/tiles/blocks/brick0.png',
           }
         ]
       }
