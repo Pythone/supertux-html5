@@ -13,7 +13,7 @@ export default class extends Phaser.State {
 
     this.tilemap = null
     this.layerGround = null
-    this.layerCrates = null
+    this.cratesEmpty = null
   }
   init () {
     this.physics.startSystem(Phaser.Physics.ARCADE)
@@ -26,15 +26,13 @@ export default class extends Phaser.State {
     this.keyLeft = this.input.keyboard.addKey(Phaser.Keyboard.LEFT)
     this.keyRight = this.input.keyboard.addKey(Phaser.Keyboard.RIGHT)
 
+    // this.add.image(0, 0, 'background/arcticskies')
+
     this.tilemap = this.add.tilemap('tilemapWorld_0_0')
     this.tilemap.addTilesetImage('icebridge')
-    this.tilemap.addTilesetImage('brick0')
+    // this.tilemap.addTilesetImage('brick0')
     this.layerGround = this.tilemap.createLayer('Ground')
-    this.layerCrates = this.tilemap.createLayer('Crates')
     this.layerGround.resizeWorld()
-    this.layerCrates.resizeWorld()
-
-    //this.add.image(0, 0, 'background/arcticskies')
 
     this.tux = new CharacterTux(this.game, 100, 100, 'tux')
     this.add.existing(this.tux)
@@ -46,10 +44,13 @@ export default class extends Phaser.State {
     this.camera.follow(this.tux)
 
     this.tilemap.setCollisionBetween(1, 100, true, this.layerGround)
-    //this.tilemap.setCollisionBetween(1, 100)
-    //this.tilemap.setCollision(1, true, this.layerGround)
 
-    //console.log(this.layerGround.getTiles(0, 0, this.layerGround.layer.widthInPixels, this.layerGround.layer.heightInPixels))
+    this.createCratesEmpty()
+
+    // this.tilemap.setCollisionBetween(1, 100)
+    // this.tilemap.setCollision(1, true, this.layerGround)
+
+    // console.log(this.layerGround.getTiles(0, 0, this.layerGround.layer.widthInPixels, this.layerGround.layer.heightInPixels))
   }
 
   update () {
@@ -75,10 +76,45 @@ export default class extends Phaser.State {
     if (this.keyUp.isDown && this.tux.body.blocked.down) {
       this.tuxVelocity.y = -280
     }
-
   }
 
   render () {
-    //this.game.debug.body(this.tux)
+    // this.game.debug.body(this.tux)
+  }
+
+  createCratesEmpty () {
+    let result = null
+
+    this.cratesEmpty = this.add.group()
+    this.cratesEmpty.enableBody = true
+
+    result = this.findObjectsByType('crateEmpty', this.tilemap, 'Crates')
+    result.forEach((element) => {
+      this.createFromTiledObject(element, this.cratesEmpty, false)
+    })
+  }
+
+  findObjectsByType (type, map, layer) {
+    let result = []
+
+    map.objects[layer].forEach(element => {
+      try {
+        if (element.properties.type === type) {
+                // Reposition height to fit the Phaser drawing order
+          element.y -= map.tileHeight
+          result.push(element)
+        }
+      } catch (e) {
+        console.log(e)
+      }
+    })
+
+    return result
+  }
+
+  createFromTiledObject (element, group, allowGravity) {
+    let sprite = group.create(element.x, element.y, element.properties.imageKey)
+
+    sprite.body.allowGravity = allowGravity
   }
 }
