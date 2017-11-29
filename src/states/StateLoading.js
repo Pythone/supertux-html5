@@ -32,6 +32,16 @@ export default class extends Phaser.State {
 
     if (asset.type === 'atlasJSON') {
       this.load.atlasJSONArray(asset.name, asset.url_img, asset.url_json)
+      return
+    }
+
+    if (asset.type === 'tilemap_json') {
+      this.load.tilemap(asset.name, asset.url, null, Phaser.Tilemap.TILED_JSON)
+      return 
+    }
+    if (asset.type === 'tilemap_csv') {
+      this.load.tilemap(asset.name, asset.url, null, Phaser.Tilemap.TILED_CSV)
+      return 
     }
   }
 }
