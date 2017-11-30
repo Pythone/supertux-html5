@@ -54,7 +54,13 @@ export default {
           {
             name: 'brick0',
             type: 'image',
-            url: 'assets/images/original/images/tiles/blocks/brick0.png',
+            url: 'assets/images/original/images/tiles/blocks/brick0.png'
+          },
+          {
+            name: 'unknown_bonus',
+            type: 'atlasJSON',
+            url_img: 'assets/images/bonus_blocks/unknown_bonus.png',
+            url_json: 'assets/images/bonus_blocks/unknown_bonus.json'
           }
         ]
       }
