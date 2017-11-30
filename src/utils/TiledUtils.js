@@ -28,9 +28,10 @@ export function findObjectsByType (type, map, layer) {
   return result
 }
 
-export function createFromTiledObject (element, group, allowGravity) {
+export function createFromTiledObject (element, group, bodyProperties) {
   let sprite = group.create(element.x, element.y, element.properties.imageKey)
 
-  sprite.body.allowGravity = allowGravity
-  sprite.body.immovable = true
+  Object.keys(bodyProperties).forEach((property) => {
+    sprite.body[property] = bodyProperties[property]
+  })
 }

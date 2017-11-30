@@ -87,13 +87,17 @@ export default class extends Phaser.State {
 
   createCratesEmpty () {
     let tiledObjects = null
+    let bodyProperties = {}
+
+    bodyProperties.allowGravity = false
+    bodyProperties.immovable = true
 
     this.cratesEmpty = this.add.group()
     this.cratesEmpty.enableBody = true
 
     tiledObjects = TiledUtils.findObjectsByType('crateEmpty', this.tilemap, 'Crates')
     tiledObjects.forEach((element) => {
-      TiledUtils.createFromTiledObject(element, this.cratesEmpty, false)
+      TiledUtils.createFromTiledObject(element, this.cratesEmpty, bodyProperties)
     })
   }
 }
