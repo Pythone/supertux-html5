@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
 import CharacterTux from '../sprites/characters/CharacterTux'
+import * as TiledUtils from '../utils/TiledUtils'
 
 export default class extends Phaser.State {
   constructor () {
@@ -18,6 +19,8 @@ export default class extends Phaser.State {
   init () {
     this.physics.startSystem(Phaser.Physics.ARCADE)
     this.physics.arcade.gravity.y = 300
+
+    console.log(TiledUtils)
   }
   preload () {}
 
@@ -56,13 +59,7 @@ export default class extends Phaser.State {
   update () {
     this.tuxVelocity.x = 0
 
-    /*
-    this.physics.arcade.collide(this.tux, this.layerGround, function(){
-        console.log('tux and layerGround collsion')
-    })
-    */
     this.physics.arcade.collide(this.tux, this.layerGround)
-
     this.physics.arcade.collide(this.tux, this.cratesEmpty, (tux, emptyCrate) => {
       if (emptyCrate.body.touching.down) {
         emptyCrate.destroy()
@@ -78,7 +75,7 @@ export default class extends Phaser.State {
       this.tux.faceRight()
     }
 
-      // JUMP: this.tux.body.blocked.down checks if tux is 'standing'
+    // JUMP: this.tux.body.blocked.down checks if tux is 'standing'
     if (this.keyUp.isDown && this.tux.body.blocked.down) {
       this.tuxVelocity.y = -280
     }
@@ -89,39 +86,14 @@ export default class extends Phaser.State {
   }
 
   createCratesEmpty () {
-    let result = null
+    let tiledObjects = null
 
     this.cratesEmpty = this.add.group()
     this.cratesEmpty.enableBody = true
 
-    result = this.findObjectsByType('crateEmpty', this.tilemap, 'Crates')
-    result.forEach((element) => {
-      this.createFromTiledObject(element, this.cratesEmpty, false)
+    tiledObjects = TiledUtils.findObjectsByType('crateEmpty', this.tilemap, 'Crates')
+    tiledObjects.forEach((element) => {
+      TiledUtils.createFromTiledObject(element, this.cratesEmpty, false)
     })
-  }
-
-  findObjectsByType (type, map, layer) {
-    let result = []
-
-    map.objects[layer].forEach(element => {
-      try {
-        if (element.properties.type === type) {
-                // Reposition height to fit the Phaser drawing order
-          element.y -= map.tileHeight
-          result.push(element)
-        }
-      } catch (e) {
-        console.log(e)
-      }
-    })
-
-    return result
-  }
-
-  createFromTiledObject (element, group, allowGravity) {
-    let sprite = group.create(element.x, element.y, element.properties.imageKey)
-
-    sprite.body.allowGravity = allowGravity
-    sprite.body.immovable = true
   }
 }
