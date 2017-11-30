@@ -16,7 +16,7 @@ export function findObjectsByType (type, map, layer) {
   map.objects[layer].forEach(element => {
     try {
       if (element.properties.type === type) {
-          // Reposition height to fit the Phaser drawing order
+        // Reposition height to fit the Phaser drawing order
         element.y -= map.tileHeight
         result.push(element)
       }
@@ -26,12 +26,4 @@ export function findObjectsByType (type, map, layer) {
   })
 
   return result
-}
-
-export function createFromTiledObject (element, group, bodyProperties) {
-  let sprite = group.create(element.x, element.y, element.properties.imageKey)
-
-  Object.keys(bodyProperties).forEach((property) => {
-    sprite.body[property] = bodyProperties[property]
-  })
 }
