@@ -30,17 +30,17 @@ export default class extends Phaser.Sprite {
     }
   }
 
-  faceLeft(){
-      if(!this.facingLeft){
-          this.scale.x *= -1
-          this.facingLeft = true
-      }
+  faceLeft () {
+    if (!this.facingLeft) {
+      this.scale.x *= -1
+      this.facingLeft = true
+    }
   }
 
-  faceRight(){
-      if(this.facingLeft){
-          this.scale.x *= -1
-          this.facingLeft = false
-      }
+  faceRight () {
+    if (this.facingLeft) {
+      this.scale.x *= -1
+      this.facingLeft = false
+    }
   }
 }

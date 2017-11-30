@@ -37,11 +37,10 @@ export default class extends Phaser.State {
 
     if (asset.type === 'tilemap_json') {
       this.load.tilemap(asset.name, asset.url, null, Phaser.Tilemap.TILED_JSON)
-      return 
+      return
     }
     if (asset.type === 'tilemap_csv') {
       this.load.tilemap(asset.name, asset.url, null, Phaser.Tilemap.TILED_CSV)
-      return 
     }
   }
 }

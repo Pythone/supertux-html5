@@ -1,7 +1,7 @@
-export default function(config, sprite){
-    let animationsMap = new Map(config)
+export default function (config, sprite) {
+  let animationsMap = new Map(config)
 
-    for(let key of animationsMap.keys()){
-        sprite.animations.add(key, animationsMap.get(key))
-    }
+  for (let key of animationsMap.keys()) {
+    sprite.animations.add(key, animationsMap.get(key))
+  }
 }
