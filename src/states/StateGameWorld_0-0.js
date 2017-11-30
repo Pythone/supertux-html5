@@ -19,8 +19,6 @@ export default class extends Phaser.State {
   init () {
     this.physics.startSystem(Phaser.Physics.ARCADE)
     this.physics.arcade.gravity.y = 300
-
-    console.log(TiledUtils)
   }
   preload () {}
 
