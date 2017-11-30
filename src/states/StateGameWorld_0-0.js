@@ -1,5 +1,7 @@
 import Phaser from 'phaser'
 import CharacterTux from '../sprites/characters/CharacterTux'
+import BlockBonusUnknown from '../sprites/objects/blocks/BlockUnknownBonus'
+import CrateEmpty from '../sprites/objects/crates/CrateEmpty'
 import * as TiledUtils from '../utils/TiledUtils'
 
 export default class extends Phaser.State {
@@ -15,6 +17,7 @@ export default class extends Phaser.State {
     this.tilemap = null
     this.layerGround = null
     this.cratesEmpty = null
+    this.bonusUnknown = null
   }
   init () {
     this.physics.startSystem(Phaser.Physics.ARCADE)
@@ -27,11 +30,8 @@ export default class extends Phaser.State {
     this.keyLeft = this.input.keyboard.addKey(Phaser.Keyboard.LEFT)
     this.keyRight = this.input.keyboard.addKey(Phaser.Keyboard.RIGHT)
 
-    // this.add.image(0, 0, 'background/arcticskies')
-
     this.tilemap = this.add.tilemap('tilemapWorld_0_0')
     this.tilemap.addTilesetImage('icebridge')
-    // this.tilemap.addTilesetImage('brick0')
     this.layerGround = this.tilemap.createLayer('Ground')
     this.layerGround.resizeWorld()
 
@@ -47,11 +47,7 @@ export default class extends Phaser.State {
     this.tilemap.setCollisionBetween(1, 100, true, this.layerGround)
 
     this.createCratesEmpty()
-
-    // this.tilemap.setCollisionBetween(1, 100)
-    // this.tilemap.setCollision(1, true, this.layerGround)
-
-    // console.log(this.layerGround.getTiles(0, 0, this.layerGround.layer.widthInPixels, this.layerGround.layer.heightInPixels))
+    this.createBlocks()
   }
 
   update () {
@@ -85,17 +81,25 @@ export default class extends Phaser.State {
 
   createCratesEmpty () {
     let tiledObjects = null
-    let bodyProperties = {}
-
-    bodyProperties.allowGravity = false
-    bodyProperties.immovable = true
 
     this.cratesEmpty = this.add.group()
-    this.cratesEmpty.enableBody = true
 
     tiledObjects = TiledUtils.findObjectsByType('crateEmpty', this.tilemap, 'Crates')
     tiledObjects.forEach((element) => {
-      TiledUtils.createFromTiledObject(element, this.cratesEmpty, bodyProperties)
+      this.cratesEmpty.add(new CrateEmpty(this.game, element.x, element.y, 'brick0'))
+    })
+  }
+
+  createBlocks () {
+    let tiledObjects = null
+
+    this.bonusUnknown = this.add.group()
+
+    tiledObjects = TiledUtils.findObjectsByType('block_unknown_bonus', this.tilemap, 'Blocks')
+    tiledObjects.forEach((element) => {
+      let blockBonusUnknown = new BlockBonusUnknown(this.game, element.x, element.y, 'unknown_bonus')
+      blockBonusUnknown.playAnimation()
+      this.bonusUnknown.add(blockBonusUnknown)
     })
   }
 }
