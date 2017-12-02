@@ -61,6 +61,12 @@ export default {
             type: 'atlasJSON',
             url_img: 'assets/images/bonus_blocks/unknown_bonus.png',
             url_json: 'assets/images/bonus_blocks/unknown_bonus.json'
+          },
+          {
+            name: 'coinImage',
+            type: 'atlasJSON',
+            url_img: 'assets/images/coin/coin.png',
+            url_json: 'assets/images/coin/coin.json'
           }
         ]
       }
