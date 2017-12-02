@@ -8,4 +8,9 @@ export default class extends Phaser.Sprite {
     this.body.allowGravity = false
     this.body.immovable = true
   }
+
+  collision () {
+    console.log('CrateEmpty collision() called')
+    this.destroy()
+  }
 }

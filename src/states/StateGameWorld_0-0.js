@@ -56,7 +56,7 @@ export default class extends Phaser.State {
     this.physics.arcade.collide(this.tux, this.layerGround)
     this.physics.arcade.collide(this.tux, this.cratesEmpty, (tux, emptyCrate) => {
       if (emptyCrate.body.touching.down) {
-        emptyCrate.destroy()
+        emptyCrate.collision()
       }
     })
 
