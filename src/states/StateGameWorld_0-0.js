@@ -16,8 +16,8 @@ export default class extends Phaser.State {
 
     this.tilemap = null
     this.layerGround = null
-    this.cratesEmpty = null
-    this.bonusUnknown = null
+    this.groupCratesEmpty = null
+    this.groupBonusUnknown = null
   }
   init () {
     this.physics.startSystem(Phaser.Physics.ARCADE)
@@ -54,7 +54,7 @@ export default class extends Phaser.State {
     this.tuxVelocity.x = 0
 
     this.physics.arcade.collide(this.tux, this.layerGround)
-    this.physics.arcade.collide(this.tux, this.cratesEmpty, (tux, emptyCrate) => {
+    this.physics.arcade.collide(this.tux, this.groupCratesEmpty, (tux, emptyCrate) => {
       if (emptyCrate.body.touching.down) {
         emptyCrate.collision()
       }
@@ -82,24 +82,24 @@ export default class extends Phaser.State {
   createCratesEmpty () {
     let tiledObjects = null
 
-    this.cratesEmpty = this.add.group()
+    this.groupCratesEmpty = this.add.group()
 
     tiledObjects = TiledUtils.findObjectsByType('crateEmpty', this.tilemap, 'Crates')
     tiledObjects.forEach((element) => {
-      this.cratesEmpty.add(new CrateEmpty(this.game, element.x, element.y, 'brick0'))
+      this.groupCratesEmpty.add(new CrateEmpty(this.game, element.x, element.y, 'brick0'))
     })
   }
 
   createBlocks () {
     let tiledObjects = null
 
-    this.bonusUnknown = this.add.group()
+    this.groupBonusUnknown = this.add.group()
 
     tiledObjects = TiledUtils.findObjectsByType('block_unknown_bonus', this.tilemap, 'Blocks')
     tiledObjects.forEach((element) => {
       let blockBonusUnknown = new BlockBonusUnknown(this.game, element.x, element.y, 'unknown_bonus')
       blockBonusUnknown.playAnimation()
-      this.bonusUnknown.add(blockBonusUnknown)
+      this.groupBonusUnknown.add(blockBonusUnknown)
     })
   }
 }
