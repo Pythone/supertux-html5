@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 import CharacterTux from '../sprites/characters/CharacterTux'
-import BlockBonusUnknown from '../sprites/objects/blocks/BlockUnknownBonus'
+import BlockBonusUnknown from '../sprites/objects/blocks/BlockBonusUnknown'
+import BlockBonusCoin from '../sprites/objects/blocks/BlockBonusCoin'
 import CrateEmpty from '../sprites/objects/crates/CrateEmpty'
 import * as TiledUtils from '../utils/TiledUtils'
 
@@ -56,7 +57,12 @@ export default class extends Phaser.State {
     this.physics.arcade.collide(this.tux, this.layerGround)
     this.physics.arcade.collide(this.tux, this.groupCratesEmpty, (tux, emptyCrate) => {
       if (emptyCrate.body.touching.down) {
-        emptyCrate.collision()
+        emptyCrate.onCollision()
+      }
+    })
+    this.physics.arcade.collide(this.tux, this.groupBonusUnknown, (tux, block) => {
+      if (block.body.touching.down) {
+        block.onCollision()
       }
     })
 
@@ -92,14 +98,27 @@ export default class extends Phaser.State {
 
   createBlocks () {
     let tiledObjects = null
+    let tiledBonusCoin = []
+    let tiledBonusPowerup = []
 
     this.groupBonusUnknown = this.add.group()
 
     tiledObjects = TiledUtils.findObjectsByType('block_unknown_bonus', this.tilemap, 'Blocks')
-    tiledObjects.forEach((element) => {
-      let blockBonusUnknown = new BlockBonusUnknown(this.game, element.x, element.y, 'unknown_bonus')
-      blockBonusUnknown.playAnimation()
-      this.groupBonusUnknown.add(blockBonusUnknown)
+
+    tiledObjects.forEach(element => {
+      switch (element.properties.bonus) {
+        case 'coin':
+          tiledBonusCoin.push(element)
+          break
+        case 'powerup':
+          tiledBonusPowerup.push(element)
+          break
+      }
+    })
+
+    tiledBonusCoin.forEach((element) => {
+      let blockBonusCoin = new BlockBonusCoin(this.game, element.x, element.y, 'unknown_bonus', 'coinImage')
+      this.groupBonusUnknown.add(blockBonusCoin)
     })
   }
 }

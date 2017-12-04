@@ -16,4 +16,7 @@ export default class extends Phaser.Sprite {
   playAnimation () {
     this.play('shine', 7, true)
   }
+
+  onCollision () {
+  }
 }
