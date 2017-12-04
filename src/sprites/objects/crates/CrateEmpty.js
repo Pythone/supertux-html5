@@ -9,7 +9,7 @@ export default class extends Phaser.Sprite {
     this.body.immovable = true
   }
 
-  collision () {
+  onCollision () {
     this.destroy()
   }
 }
