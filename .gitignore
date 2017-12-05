@@ -3,5 +3,6 @@ dist/
 assets/
 *.log
 *.swp
+*.foo
 package-lock.json
 /index.html

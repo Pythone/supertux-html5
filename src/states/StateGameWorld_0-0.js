@@ -1,6 +1,5 @@
 import Phaser from 'phaser'
 import CharacterTux from '../sprites/characters/CharacterTux'
-import BlockBonusUnknown from '../sprites/objects/blocks/BlockBonusUnknown'
 import BlockBonusCoin from '../sprites/objects/blocks/BlockBonusCoin'
 import CrateEmpty from '../sprites/objects/crates/CrateEmpty'
 import * as TiledUtils from '../utils/TiledUtils'
@@ -56,11 +55,16 @@ export default class extends Phaser.State {
 
     this.physics.arcade.collide(this.tux, this.layerGround)
     this.physics.arcade.collide(this.tux, this.groupCratesEmpty, (tux, emptyCrate) => {
+      // This is a workaround for setting blocked.down to true when tux is 'standing on' that group
+      this.tux.body.blocked.down = true
+
       if (emptyCrate.body.touching.down) {
         emptyCrate.onCollision()
       }
     })
     this.physics.arcade.collide(this.tux, this.groupBonusUnknown, (tux, block) => {
+      // This is a workaround for setting blocked.down to true when tux is 'standing on' that group
+      this.tux.body.blocked.down = true
       if (block.body.touching.down) {
         block.onCollision()
       }
