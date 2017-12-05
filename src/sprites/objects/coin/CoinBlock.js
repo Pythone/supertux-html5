@@ -5,10 +5,13 @@ export default class extends Coin {
     super(game, x, y, assetKey)
 
     this.tweenMoveUp = this.game.add.tween(this)
-    this.tweenMoveUp.to({y: this.y - 100})
+    this.tweenMoveUp.to({y: this.y - 100, alpha: 0}, 500)
+    this.tweenMoveUp.onComplete.add(() => {
+      this.destroy()
+    })
 
     this.events.onAddedToGroup.add(() => {
-      this.play('coin_turning', 10, true)
+      this.play('coin_turning', 30, true)
       this.tweenMoveUp.start()
     })
   }
