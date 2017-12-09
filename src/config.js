@@ -67,6 +67,11 @@ export default {
             type: 'atlasJSON',
             url_img: 'assets/images/coin/coin.png',
             url_json: 'assets/images/coin/coin.json'
+          },
+          {
+            name: 'egg-shade',
+            type: 'image',
+            url: 'assets/images/original/images/egg-shade.png'
           }
         ]
       }
