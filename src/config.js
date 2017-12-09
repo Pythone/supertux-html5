@@ -72,6 +72,12 @@ export default {
             name: 'egg-shade',
             type: 'image',
             url: 'assets/images/egg-shade.png'
+          },
+          {
+            name: 'fire_flower',
+            type: 'atlasJSON',
+            url_img: 'assets/images/fire_flower/fire_flower.png',
+            url_json: 'assets/images/fire_flower/fire_flower.json'
           }
         ]
       }
