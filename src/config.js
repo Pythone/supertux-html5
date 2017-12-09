@@ -71,7 +71,7 @@ export default {
           {
             name: 'egg-shade',
             type: 'image',
-            url: 'assets/images/original/images/egg-shade.png'
+            url: 'assets/images/egg-shade.png'
           }
         ]
       }
