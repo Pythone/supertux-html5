@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 import CharacterTux from '../sprites/characters/CharacterTux'
 import BlockBonusCoin from '../sprites/objects/blocks/BlockBonusCoin'
+import BlockBonusGrow from '../sprites/objects/blocks/BlockBonusGrow'
 import CrateEmpty from '../sprites/objects/crates/CrateEmpty'
 import * as TiledUtils from '../utils/TiledUtils'
 
@@ -64,9 +65,11 @@ export default class extends Phaser.State {
     })
     this.physics.arcade.collide(this.tux, this.groupBonusUnknown, (tux, block) => {
       // This is a workaround for setting blocked.down to true when tux is 'standing on' that group
+      // Otherwise Tux will not be able to jump
       this.tux.body.blocked.down = true
+
       if (block.body.touching.down) {
-        block.onCollision()
+        block.onCollision(tux)
       }
     })
 
@@ -123,6 +126,15 @@ export default class extends Phaser.State {
     tiledBonusCoin.forEach((element) => {
       let blockBonusCoin = new BlockBonusCoin(this.game, element.x, element.y, 'unknown_bonus', 'coinImage')
       this.groupBonusUnknown.add(blockBonusCoin)
+    })
+
+    tiledBonusPowerup.forEach((element) => {
+      switch (element.properties.powerupType) {
+        case 'grow':
+          let blockBonusGrow = new BlockBonusGrow(this.game, element.x, element.y, this.tux, 'unknown_bonus', 'egg-shade', 'fire_flower')
+          this.groupBonusUnknown.add(blockBonusGrow)
+          break
+      }
     })
   }
 }
