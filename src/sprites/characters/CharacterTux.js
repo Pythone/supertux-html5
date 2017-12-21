@@ -9,6 +9,12 @@ export default class extends Phaser.Sprite {
     this.facingLeft = false
     this.anchor.x = 0.5
     this.anchor.y = 0.5
+    this.enumGrowth = Object.freeze({
+      SMALL: 0,
+      BIG: 1,
+      FIRE_THROWER: 2
+    })
+    this.currentGrowth = this.enumGrowth.SMALL
 
     setAnimations(configTux.animations, this)
 
@@ -41,6 +47,15 @@ export default class extends Phaser.Sprite {
     if (this.facingLeft) {
       this.scale.x *= -1
       this.facingLeft = false
+    }
+  }
+
+  grow () {
+    switch (this.currentGrowth) {
+      case this.enumGrowth.SMALL:
+        this.currentGrowth = this.enumGrowth.BIG
+        this.setAnimation('big/walk')
+        break
     }
   }
 }
