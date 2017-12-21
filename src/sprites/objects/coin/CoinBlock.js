@@ -1,3 +1,7 @@
+/*
+* Coin that comes from a BlockBonusCoin
+*/
+
 import Coin from './Coin'
 
 export default class extends Coin {
