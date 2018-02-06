@@ -11,4 +11,4 @@ Mainly for fun and experimentation with the Phaser framework
 ## Bootstrap project used:
 https://github.com/lean/phaser-es6-webpack
 
-![Gameplay preview](https://i.imgur.com/Hk7OYsM.gif)
+![Gameplay preview](gameplay_preview.gif)
